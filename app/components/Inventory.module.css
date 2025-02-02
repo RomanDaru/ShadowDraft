@@ -13,22 +13,6 @@
   margin-bottom: 10px;
 }
 
-.equipmentGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  width: 100%;
-  max-width: 400px;
-}
-
-.equipmentSlot {
-  padding: 8px;
-  border: 2px solid var(--gray-alpha-200);
-  border-radius: 6px;
-  background: var(--gray-alpha-100);
-  text-align: center;
-}
-
 .equippedItem {
   background: var(--primary-color);
   color: white;
@@ -50,10 +34,12 @@
 
 .list {
   width: 100%;
-  padding: 0;
+  padding: 0px;
+  list-style: none;
 }
 
 .item {
+  text-align: center;
   padding: 12px;
   border: 1px solid var(--gray-alpha-200);
   border-radius: 6px;
@@ -75,38 +61,61 @@
 
 .characterGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto auto auto;
   gap: 10px;
   align-items: center;
   justify-items: center;
+
+  grid-template-areas:
+    ". helmet ."
+    "gloveLeft chest gloveRight"
+    ". boots weapon"
+    "passives passives passives";
 }
 
-.head {
-  grid-column: 2 / 3;
+.helmet {
+  grid-area: helmet;
 }
 
 .chest {
-  grid-column: 2 / 3;
-  grid-row: 2;
+  grid-area: chest;
 }
 
 .gloveLeft {
-  grid-column: 1;
-  grid-row: 2;
+  grid-area: gloveLeft;
 }
 
 .gloveRight {
-  grid-column: 3;
-  grid-row: 2;
+  grid-area: gloveRight;
 }
 
 .boots {
-  grid-column: 2 / 3;
-  grid-row: 3;
+  grid-area: boots;
 }
 
 .weapon {
-  grid-column: 1 / 2;
-  grid-row: 3;
+  grid-area: weapon;
+}
+
+.passives {
+  grid-area: passives;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.equipmentSlot {
+  background: var(--gray-alpha-100);
+  padding: 12px;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+  width: 120px;
+}
+
+.equipmentSlot:hover {
+  transform: scale(1.05);
+  transition: 0.2s;
 }

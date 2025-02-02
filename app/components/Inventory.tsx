@@ -39,56 +39,103 @@ const InventoryUI: React.FC<InventoryProps> = ({ player, updatePlayer }) => {
     updatePlayer(updatedPlayer);
   };
 
-  const renderEquippedItem = (slot: string, item: Item | null) => (
-    <div key={slot} className={styles.equipmentSlot}>
-      <strong>{slot.charAt(0).toUpperCase() + slot.slice(1)}:</strong>
-      {item ? (
-        <button
-          className={styles.equippedItem}
-          onClick={() => handleItemClick(item)}>
-          {item.name} (
-          {item.durability !== undefined
-            ? `${item.durability} Durability`
-            : "∞"}
-          )
-        </button>
-      ) : (
-        <span className={styles.emptySlot}>Empty</span>
-      )}
-    </div>
-  );
-
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Equipped Items</h2>
-      <div className={styles.equipmentGrid}>
-        {Object.entries(equippedItems).map(([slot, item]) => {
-          if (slot === "passives") {
-            return (
-              <div key={slot} className={styles.equipmentSlot}>
-                <strong>Passives:</strong>
-                {equippedItems.passives.length > 0 ? (
-                  equippedItems.passives.map((passive) => (
-                    <button
-                      key={passive.id}
-                      className={styles.equippedItem}
-                      onClick={() => handleItemClick(passive)}>
-                      {passive.name}
-                    </button>
-                  ))
-                ) : (
-                  <span className={styles.emptySlot}>None</span>
-                )}
-              </div>
-            );
-          }
 
-          // Type assertion for slots and items
-          const equipmentSlot = slot as keyof Omit<EquippedItems, "passives">;
-          const equippedItem = item as Item | null;
+      <div className={styles.characterGrid}>
+        <div className={styles.helmet}>
+          <strong>Helmet:</strong>
+          {equippedItems.helmet ? (
+            <button
+              className={styles.equippedItem}
+              onClick={() => handleItemClick(equippedItems.helmet)}>
+              {equippedItems.helmet.name}
+            </button>
+          ) : (
+            <span className={styles.emptySlot}>Empty</span>
+          )}
+        </div>
 
-          return renderEquippedItem(equipmentSlot, equippedItem);
-        })}
+        <div className={styles.chest}>
+          <strong>Chest Armor:</strong>
+          {equippedItems.chestArmor ? (
+            <button
+              className={styles.equippedItem}
+              onClick={() => handleItemClick(equippedItems.chestArmor)}>
+              {equippedItems.chestArmor.name}
+            </button>
+          ) : (
+            <span className={styles.emptySlot}>Empty</span>
+          )}
+        </div>
+
+        <div className={styles.gloveLeft}>
+          <strong>Left Glove:</strong>
+          {equippedItems.gloves ? (
+            <button
+              className={styles.equippedItem}
+              onClick={() => handleItemClick(equippedItems.gloves)}>
+              {equippedItems.gloves.name}
+            </button>
+          ) : (
+            <span className={styles.emptySlot}>Empty</span>
+          )}
+        </div>
+
+        <div className={styles.gloveRight}>
+          <strong>Right Glove:</strong>
+          {equippedItems.gloves ? (
+            <button
+              className={styles.equippedItem}
+              onClick={() => handleItemClick(equippedItems.gloves)}>
+              {equippedItems.gloves.name}
+            </button>
+          ) : (
+            <span className={styles.emptySlot}>Empty</span>
+          )}
+        </div>
+
+        <div className={styles.boots}>
+          <strong>Boots:</strong>
+          {equippedItems.boots ? (
+            <button
+              className={styles.equippedItem}
+              onClick={() => handleItemClick(equippedItems.boots)}>
+              {equippedItems.boots.name}
+            </button>
+          ) : (
+            <span className={styles.emptySlot}>Empty</span>
+          )}
+        </div>
+
+        <div className={styles.weapon}>
+          <strong>Weapon:</strong>
+          {equippedItems.weapon ? (
+            <button
+              className={styles.equippedItem}
+              onClick={() => handleItemClick(equippedItems.weapon)}>
+              {equippedItems.weapon.name}
+            </button>
+          ) : (
+            <span className={styles.emptySlot}>Empty</span>
+          )}
+        </div>
+        <div className={styles.passives}>
+          <strong>Passives:</strong>
+          {equippedItems.passives.length > 0 ? (
+            equippedItems.passives.map((passive) => (
+              <button
+                key={passive.id}
+                className={styles.equippedItem}
+                onClick={() => handleItemClick(passive)}>
+                {passive.name}
+              </button>
+            ))
+          ) : (
+            <span className={styles.emptySlot}>None</span>
+          )}
+        </div>
       </div>
 
       <h2 className={styles.title}>Inventory</h2>

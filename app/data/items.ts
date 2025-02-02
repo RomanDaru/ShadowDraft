@@ -1,5 +1,11 @@
 // data/items.ts - Expanded Item Pool with Durability
-export type ItemType = "weapon" | "armor" | "passive";
+export type ItemType =
+  | "weapon"
+  | "helmet"
+  | "chestArmor"
+  | "gloves"
+  | "boots"
+  | "passive";
 export type Rarity = "common" | "uncommon" | "rare" | "epic" | "legendary";
 
 export interface Item {
@@ -44,7 +50,7 @@ export const generalItems: Item[] = [
   {
     id: 4,
     name: "Reinforced Shield",
-    type: "armor",
+    type: "gloves",
     defense: 15,
     rarity: "uncommon",
     durability: 25,
@@ -52,7 +58,7 @@ export const generalItems: Item[] = [
   {
     id: 5,
     name: "Leather Armor",
-    type: "armor",
+    type: "chestArmor",
     defense: 10,
     rarity: "common",
     durability: 18,
@@ -60,7 +66,7 @@ export const generalItems: Item[] = [
   {
     id: 6,
     name: "Chainmail Vest",
-    type: "armor",
+    type: "chestArmor",
     defense: 14,
     rarity: "uncommon",
     durability: 22,
@@ -68,7 +74,7 @@ export const generalItems: Item[] = [
   {
     id: 7,
     name: "Knight's Plate",
-    type: "armor",
+    type: "chestArmor",
     defense: 20,
     specialEffect: "Reduces incoming damage by 5%",
     rarity: "rare",
@@ -77,7 +83,7 @@ export const generalItems: Item[] = [
   {
     id: 8,
     name: "Battle Boots",
-    type: "armor",
+    type: "boots",
     defense: 8,
     rarity: "uncommon",
     durability: 15,
@@ -85,7 +91,7 @@ export const generalItems: Item[] = [
   {
     id: 9,
     name: "Berserker Gloves",
-    type: "armor",
+    type: "gloves",
     defense: 6,
     specialEffect: "+10% attack speed",
     rarity: "rare",
@@ -108,7 +114,7 @@ export const generalItems: Item[] = [
   {
     id: 12,
     name: "Helmet of Insight",
-    type: "armor",
+    type: "helmet",
     defense: 7,
     specialEffect: "+5% Critical Hit",
     rarity: "uncommon",
@@ -131,7 +137,7 @@ export const classItems: Item[] = [
   {
     id: 14,
     name: "Shadow Cloak",
-    type: "armor",
+    type: "chestArmor",
     defense: 8,
     specialEffect: "Stealth increase",
     rarity: "uncommon",

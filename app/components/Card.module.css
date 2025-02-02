@@ -1,0 +1,56 @@
+.card {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.cardRarity {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+/* Rarity colors */
+.common {
+  background-color: #4a5568;
+}
+.uncommon {
+  background-color: #48bb78;
+}
+.rare {
+  background-color: #4299e1;
+}
+.epic {
+  background-color: #9f7aea;
+}
+.legendary {
+  background-color: #f6e05e;
+}
+
+.cardContent {
+  margin-top: 1rem;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.cardType {
+  color: #a0aec0;
+  font-size: 0.875rem;
+}
