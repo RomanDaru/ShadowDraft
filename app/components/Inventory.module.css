@@ -65,3 +65,48 @@
 .item:hover {
   background: var(--button-secondary-hover);
 }
+
+.toggleButtons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.characterGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 10px;
+  align-items: center;
+  justify-items: center;
+}
+
+.head {
+  grid-column: 2 / 3;
+}
+
+.chest {
+  grid-column: 2 / 3;
+  grid-row: 2;
+}
+
+.gloveLeft {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.gloveRight {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.boots {
+  grid-column: 2 / 3;
+  grid-row: 3;
+}
+
+.weapon {
+  grid-column: 1 / 2;
+  grid-row: 3;
+}

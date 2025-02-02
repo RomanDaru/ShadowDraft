@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { openPack } from "@/app/data/pack";
 import { Player } from "@/app/data/player";
 import { Item } from "@/app/data/items";
@@ -15,70 +15,86 @@ interface PackOpeningProps {
 const PackOpening: React.FC<PackOpeningProps> = ({ player, onFinish }) => {
   const [packItems, setPackItems] = useState<Item[]>([]);
   const [selectedItems, setSelectedItems] = useState<Item[]>([]);
-  const maxSelections = 3; // ✅ Player can only pick 3 cards
+  const [isOpened, setIsOpened] = useState(false); // ✅ Track if pack is opened
+  const maxSelections = 3;
 
-  useEffect(() => {
-    setPackItems(openPack(player)); // ✅ Auto-open the pack
-  }, [player]);
+  const handleOpenPack = () => {
+    setPackItems(openPack(player)); // ✅ Open pack on button click
+    setIsOpened(true);
+  };
 
   const toggleSelectItem = (item: Item) => {
     if (selectedItems.includes(item)) {
-      setSelectedItems(selectedItems.filter((i) => i.id !== item.id)); // ✅ Remove from selection
+      setSelectedItems(selectedItems.filter((i) => i.id !== item.id));
     } else if (selectedItems.length < maxSelections) {
-      setSelectedItems([...selectedItems, item]); // ✅ Add if within limit
+      setSelectedItems([...selectedItems, item]);
     }
   };
 
   const confirmSelection = () => {
-    selectedItems.forEach((item) => player.addItem(item)); // ✅ Restore inventory.addItem()
-    onFinish(); // ✅ Transition to inventory screen
+    selectedItems.forEach((item) => player.addItem(item));
+    onFinish();
   };
 
   return (
     <div className={styles.container}>
-      <h2>Pack Opened! Choose {maxSelections} items</h2>
-      <div className={styles.packDisplay}>
-        {packItems.map((item) => (
-          <div
-            key={item.id}
-            className={`${styles.itemCard} ${
-              selectedItems.includes(item) ? styles.selected : ""
-            }`}
-            onClick={() => toggleSelectItem(item)}>
-            <h3>{item.name}</h3>
-            <p>
-              <strong>Type:</strong> {item.type}
-            </p>
-            {item.attack && (
-              <p>
-                <strong>Attack:</strong> {item.attack}
-              </p>
-            )}
-            {item.defense && (
-              <p>
-                <strong>Defense:</strong> {item.defense}
-              </p>
-            )}
-            {item.specialEffect && (
-              <p>
-                <strong>Effect:</strong> {item.specialEffect}
-              </p>
-            )}
-            {item.durability !== undefined && (
-              <p>
-                <strong>Durability:</strong> {item.durability}
-              </p>
-            )}
-            <p className={styles[item.rarity]}>{item.rarity.toUpperCase()}</p>
-          </div>
-        ))}
-      </div>
-      {selectedItems.length === maxSelections && (
+      <h2>Pack Opening</h2>
+
+      {!isOpened ? (
         <button
           className={`${pageStyles.button} ${pageStyles.primary}`}
-          onClick={confirmSelection}>
-          Confirm Selection
+          onClick={handleOpenPack}>
+          Open Pack
         </button>
+      ) : (
+        <>
+          <h3>Choose {maxSelections} items</h3>
+          <div className={styles.packDisplay}>
+            {packItems.map((item) => (
+              <div
+                key={item.id}
+                className={`${styles.itemCard} ${
+                  selectedItems.includes(item) ? styles.selected : ""
+                }`}
+                onClick={() => toggleSelectItem(item)}>
+                <h3>{item.name}</h3>
+                <p>
+                  <strong>Type:</strong> {item.type}
+                </p>
+                {item.attack && (
+                  <p>
+                    <strong>Attack:</strong> {item.attack}
+                  </p>
+                )}
+                {item.defense && (
+                  <p>
+                    <strong>Defense:</strong> {item.defense}
+                  </p>
+                )}
+                {item.specialEffect && (
+                  <p>
+                    <strong>Effect:</strong> {item.specialEffect}
+                  </p>
+                )}
+                {item.durability !== undefined && (
+                  <p>
+                    <strong>Durability:</strong> {item.durability}
+                  </p>
+                )}
+                <p className={styles[item.rarity]}>
+                  {item.rarity.toUpperCase()}
+                </p>
+              </div>
+            ))}
+          </div>
+          {selectedItems.length === maxSelections && (
+            <button
+              className={`${pageStyles.button} ${pageStyles.primary}`}
+              onClick={confirmSelection}>
+              Confirm Selection
+            </button>
+          )}
+        </>
       )}
     </div>
   );
