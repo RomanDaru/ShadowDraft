@@ -1,0 +1,51 @@
+.container {
+  text-align: center;
+}
+
+.packDisplay {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.itemCard {
+  padding: 12px;
+  border-radius: 6px;
+  width: 150px;
+  text-align: center;
+  font-weight: bold;
+  background: var(--gray-alpha-100);
+  transition: transform 0.2s, background 0.2s;
+  cursor: pointer;
+  border: 2px solid var(--gray-alpha-200);
+}
+
+.itemCard:hover {
+  transform: scale(1.05);
+}
+
+.selected {
+  border: 3px solid var(--highlight-color);
+  background: var(--primary-color);
+}
+
+.common {
+  border: 2px solid var(--common);
+}
+
+.uncommon {
+  border: 2px solid var(--uncommon);
+}
+
+.rare {
+  border: 2px solid var(--rare);
+}
+
+.epic {
+  border: 2px solid var(--epic);
+}
+
+.legendary {
+  border: 2px solid var(--legendary);
+}

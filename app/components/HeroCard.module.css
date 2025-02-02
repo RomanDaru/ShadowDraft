@@ -1,0 +1,23 @@
+.card {
+  border: 2px solid var(--gray-alpha-200);
+  padding: 16px;
+  border-radius: 10px;
+  background: var(--gray-alpha-100);
+  text-align: center;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.card:hover {
+  background: var(--button-secondary-hover);
+  transform: scale(1.05);
+}
+
+.name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.special {
+  font-style: italic;
+  color: #888;
+}

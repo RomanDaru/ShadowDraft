@@ -1,14 +1,17 @@
 {
   "name": "game-draft-rpg",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
+    "test": "ts-node tests/inventoryTest.ts",
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.48.1",
     "@types/react-router-dom": "^5.3.3",
     "next": "15.1.6",
     "react": "^19.0.0",

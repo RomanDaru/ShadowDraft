@@ -1,0 +1,10 @@
+.container {
+  text-align: center;
+}
+
+.heroGrid {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}

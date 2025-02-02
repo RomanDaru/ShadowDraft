@@ -1,51 +1,51 @@
-// app/page.tsx
 "use client";
 
-import { useEffect } from "react";
-import Link from "next/link";
-import styles from "./page.module.css"; // Use a custom CSS file for the home page styles
+import React, { useState } from "react";
+import IntroScreen from "@/app/screens/IntroScreen";
+import HeroSelection from "@/app/components/HeroSelection";
+import InventoryUI from "@/app/components/Inventory";
+import PackOpening from "@/app/components/PackOpening"; // ✅ Import PackOpening
+import { Player } from "@/app/data/player";
+import { Hero } from "@/app/data/heroes";
+import styles from "./page.module.css";
 
-const HomePage = () => {
-  // Handle client-specific logic after the page has been hydrated
-  useEffect(() => {
-    // Make sure window.close is only called on the client-side
-    const handleExit = () => {
-      if (typeof window !== "undefined") {
-        window.close(); // Only close the window on the client-side
-      }
-    };
+const HomePage: React.FC = () => {
+  const [gameState, setGameState] = useState<
+    "intro" | "heroSelection" | "packOpening" | "inventory"
+  >("intro");
+  const [selectedHero, setSelectedHero] = useState<Hero | null>(null);
+  const [player, setPlayer] = useState<Player | null>(null);
 
-    // Attach the exit functionality to the button
-    const exitButton = document.getElementById("exitButton");
-    if (exitButton) {
-      exitButton.addEventListener("click", handleExit);
-    }
+  const startGame = () => {
+    setGameState("heroSelection");
+  };
 
-    // Cleanup the event listener
-    return () => {
-      if (exitButton) {
-        exitButton.removeEventListener("click", handleExit);
-      }
-    };
-  }, []); // Empty dependency array ensures this effect runs only once
+  const selectHero = (hero: Hero) => {
+    const newPlayer = new Player(hero.name);
+    setSelectedHero(hero);
+    setPlayer(newPlayer);
+    setGameState("packOpening"); // ✅ Transition to pack opening
+  };
 
   return (
-    <div className={styles.homePage}>
-      <p className={styles.description}>
-        Enter a dark and dangerous world filled with peril and ancient
-        treasures. Your journey begins now. Will you survive the Shadow Draft?
-      </p>
-
-      <div className={styles.menu}>
-        <Link href='/draft' className={styles.menuButton}>
-          Start Draft
-        </Link>
-        <Link href='/instructions' className={styles.menuButton}>
-          View Instructions
-        </Link>
-        <button id='exitButton' className={styles.menuButton}>
-          Exit
-        </button>
+    <div className={styles.page}>
+      <div className={styles.main}>
+        {gameState === "intro" && <IntroScreen onStart={startGame} />}
+        {gameState === "heroSelection" && (
+          <HeroSelection onSelect={selectHero} />
+        )}
+        {gameState === "packOpening" && player && (
+          <PackOpening
+            player={player}
+            onFinish={() => setGameState("inventory")}
+          /> // ✅ Correctly passing `onFinish`
+        )}
+        {gameState === "inventory" && player && (
+          <>
+            <h1 className={styles.pageTitle}>Welcome, {player.name}!</h1>
+            <InventoryUI player={player} />
+          </>
+        )}
       </div>
     </div>
   );
