@@ -27,6 +27,11 @@ const HomePage: React.FC = () => {
     setGameState("packOpening"); // ✅ Transition to pack opening
   };
 
+  // Function to update the player state
+  const updatePlayer = (updatedPlayer: Player) => {
+    setPlayer(updatedPlayer);
+  };
+
   return (
     <div className={styles.page}>
       <div className={styles.main}>
@@ -43,7 +48,8 @@ const HomePage: React.FC = () => {
         {gameState === "inventory" && player && (
           <>
             <h1 className={styles.pageTitle}>Welcome, {player.name}!</h1>
-            <InventoryUI player={player} />
+            {/* Pass the updatePlayer function to InventoryUI */}
+            <InventoryUI player={player} updatePlayer={updatePlayer} />
           </>
         )}
       </div>

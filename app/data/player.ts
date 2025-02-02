@@ -1,5 +1,14 @@
 import { Item } from "./items";
 
+export interface EquippedItems {
+  weapon: Item | null;
+  helmet: Item | null;
+  chestArmor: Item | null;
+  gloves: Item | null;
+  boots: Item | null;
+  passives: Item[];
+}
+
 export class Player {
   name: string;
   inventory: Item[] = []; // ✅ Inventory should store an array of items
@@ -67,7 +76,15 @@ export class Player {
     this.addItem(item); // ✅ Return item to inventory when unequipped
   }
 
-  getEquipment() {
+  getEquipment(): EquippedItems {
     return this.equipment;
+  }
+
+  clone(): Player {
+    const clonedPlayer = new Player(this.name);
+    clonedPlayer.inventory = [...this.inventory];
+    clonedPlayer.equipment = { ...this.equipment };
+    // Clone other properties if needed
+    return clonedPlayer;
   }
 }
