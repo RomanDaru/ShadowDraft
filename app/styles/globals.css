@@ -1,0 +1,38 @@
+:root {
+  /* 🌑 Temné farby */
+  --background-color: #1b1b1f; /* Tmavá asfaltová sivá */
+  --primary-color: #6a0dad; /* Temná fialová */
+  --secondary-color: #146b3a; /* Tmavá zelená */
+
+  /* 💡 Doplnkové */
+  --accent-color: #ffb400; /* Zlatá */
+  --danger-color: #d32f2f; /* Krvavo červená */
+  --highlight-color: #00bcd4; /* Kybernetická modrá */
+
+  /* 🏆 Rarity */
+  --common: #6d6d6d;
+  --uncommon: #4caf50;
+  --rare: #1976d2;
+  --epic: #9c27b0;
+  --legendary: #ff9800;
+
+  /* 📏 Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* 🔠 Typography */
+  --font-family: "Arial", sans-serif;
+  --font-size-base: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+}
+
+/* 🌍 Základné štýly */
+body {
+  background-color: var(--background-color);
+  color: var(--accent-color);
+  font-family: var(--font-family);
+}
